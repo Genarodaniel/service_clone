@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: +@@-RU-Wqh5EuLBU
+      MYSQL_DATABASE: jobs
+      MYSQL_USER: jobs
+      MYSQL_PASSWORD: +@@-RU-Wqh5EuLBU
+    expose:
+      - "3308"
+      - "3306"
+    ports:
+      - '3308:3306'
+  php:
+    image: jguyomard/laravel-php:7.3
+    volumes:
+      - ./:/var/www/
+      - $HOME/.composer/:$HOME/.composer/
+  nginx:
+    image: jguyomard/laravel-nginx:1.13
+    volumes:
+      - ./:/var/www/
+      - $HOME/.composer/:$HOME/.composer/
+    ports:
+      - 8005:80
